@@ -1,0 +1,32 @@
+# Backend
+backend/venv/
+backend/env/
+backend/.env
+backend/__pycache__/
+backend/*.pyc
+backend/uploads/
+backend/*.db
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Desktop (Electron)
+desktop-app/node_modules/
+desktop-app/dist/
+desktop-app/installer/
+desktop-app/release/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Orthanc (local credentials)
+orthanc/.env
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,17 @@
+services:
+  orthanc:
+    image: jodogne/orthanc:latest
+    container_name: spine_ai_orthanc
+    restart: unless-stopped
+    ports:
+      - "4242:4242"  # DICOM port (for receiving studies from PACS)
+      - "8042:8042"  # HTTP REST API & Web UI
+    volumes:
+      - ./orthanc.json:/etc/orthanc/orthanc.json:ro
+      - orthanc-db:/var/lib/orthanc/db
+    environment:
+      - ORTHANC_USERNAME=admin
+      - ORTHANC_PASSWORD=orthanc
+
+volumes:
+  orthanc-db:

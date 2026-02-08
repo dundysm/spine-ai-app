@@ -1,0 +1,372 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== Design system ========== */
+:root {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1e40af;
+  --color-nav-start: #1e3a8a;
+  --color-nav-end: #1e40af;
+  --color-secondary: #ffffff;
+  --color-accent-success: #059669;
+  --color-accent-success-light: #d1fae5;
+  --color-accent-warning: #d97706;
+  --color-accent-danger: #dc2626;
+  --color-bg: #f8fafc;
+  --color-bg-elevated: #ffffff;
+  --color-bg-subtle: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-focus: #93c5fd;
+  --color-viewer-bg: #0f172a;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --transition-default: 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+  --transition-fast: 0.15s cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-panel: 0 1px 3px rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+  --shadow-panel-soft: 0 4px 12px -2px rgb(0 0 0 / 0.06), 0 6px 20px -4px rgb(0 0 0 / 0.08);
+  --shadow-nav: 0 4px 14px -2px rgb(0 0 0 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  --shadow-focus: 0 0 0 3px rgb(37 99 235 / 0.25);
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-thumb-hover: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color var(--transition-default), color var(--transition-default);
+}
+
+/* ========== Scrollbars ========== */
+.medical-report::-webkit-scrollbar,
+.report-editor-wrapper .ql-editor::-webkit-scrollbar,
+.overflow-y-auto::-webkit-scrollbar,
+.worklist-list::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.medical-report::-webkit-scrollbar-track,
+.report-editor-wrapper .ql-editor::-webkit-scrollbar-track,
+.overflow-y-auto::-webkit-scrollbar-track,
+.worklist-list::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 4px;
+}
+.medical-report::-webkit-scrollbar-thumb,
+.report-editor-wrapper .ql-editor::-webkit-scrollbar-thumb,
+.overflow-y-auto::-webkit-scrollbar-thumb,
+.worklist-list::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+.medical-report::-webkit-scrollbar-thumb:hover,
+.report-editor-wrapper .ql-editor::-webkit-scrollbar-thumb:hover,
+.overflow-y-auto::-webkit-scrollbar-thumb:hover,
+.worklist-list::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* ========== Interactive elements ========== */
+button,
+a,
+[role="button"],
+input,
+select,
+textarea {
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    box-shadow var(--transition-fast), opacity var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-lift:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+button:not(:disabled):active,
+.btn-lift:not(:disabled):active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-lift:not(:disabled):hover,
+  .btn-lift:not(:disabled):active {
+    transform: none;
+  }
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* ========== Report editor ========== */
+.report-editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.report-editor-wrapper .quill-report {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.report-editor-wrapper .ql-container {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.report-editor-wrapper .ql-editor {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.quill-report .ql-editor {
+  font-family: var(--font-mono);
+  line-height: 1.65;
+  font-size: 14px;
+}
+.quill-report .ql-editor strong {
+  font-weight: 700;
+}
+.quill-report .ql-editor p:has(strong:only-child),
+.quill-report .ql-editor .section-header {
+  font-weight: 700;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+/* ========== Medical report (formatted HTML) ========== */
+.medical-report {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  line-height: 1.75;
+  padding: 0 0.5rem;
+}
+.medical-report h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e40af;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #1e40af;
+  letter-spacing: -0.02em;
+}
+.medical-report h1:first-child {
+  margin-top: 0;
+}
+.medical-report h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #f1f5f9;
+  border-radius: var(--radius-md);
+  border-left: 4px solid #1e40af;
+}
+.medical-report h2:first-child {
+  margin-top: 0;
+}
+.medical-report h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #334155;
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
+  padding-left: 0.5rem;
+  border-left: 3px solid #94a3b8;
+}
+.medical-report h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
+.medical-report p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+.medical-report p:last-child {
+  margin-bottom: 0;
+}
+.medical-report strong,
+.medical-report b {
+  font-weight: 600;
+  color: #0f172a;
+}
+.medical-report ul,
+.medical-report ol {
+  margin: 0.5rem 0 1rem 1.25rem;
+  padding-left: 1rem;
+}
+.medical-report li {
+  margin-bottom: 0.35rem;
+  line-height: 1.7;
+}
+.medical-report hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 1.5rem 0;
+}
+
+.medical-report .report-section-impression {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid #93c5fd;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+.medical-report .report-section-findings {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin-top: 0.75rem;
+}
+.medical-report .report-level-normal {
+  background: rgba(240, 253, 244, 0.7);
+  border-left: 3px solid #22c55e;
+  padding: 0.4rem 0.5rem 0.4rem 0.75rem;
+  margin: 0.25rem 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.medical-report .report-level-abnormal {
+  background: rgba(254, 249, 195, 0.75);
+  border-left: 3px solid #eab308;
+  padding: 0.4rem 0.5rem 0.4rem 0.75rem;
+  margin: 0.25rem 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ========== Animations ========== */
+.animate-medical-spin {
+  animation: medical-spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+@keyframes medical-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--scrollbar-track) 0%,
+    var(--scrollbar-thumb) 45%,
+    var(--scrollbar-thumb) 55%,
+    var(--scrollbar-track) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+/* ========== Skip link ========== */
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  background: var(--color-bg-elevated);
+  color: var(--color-primary);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  box-shadow: var(--shadow-panel-soft);
+  border: 1px solid var(--color-border);
+}
+
+/* ========== Stagger (for lists) ========== */
+.stagger-1 { animation-delay: 0.03s; }
+.stagger-2 { animation-delay: 0.06s; }
+.stagger-3 { animation-delay: 0.09s; }
+.stagger-4 { animation-delay: 0.12s; }
+.stagger-5 { animation-delay: 0.15s; }
+.stagger-6 { animation-delay: 0.18s; }
+.stagger-7 { animation-delay: 0.21s; }
+.stagger-8 { animation-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

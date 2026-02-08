@@ -1,0 +1,19 @@
+{
+  "Name": "Spine AI DICOM Server",
+  "AeTitle": "SPINE_AI",
+  "DicomPort": 4242,
+  "HttpPort": 8042,
+
+  "RemoteAccessAllowed": true,
+  "AuthenticationEnabled": false,
+
+  "DicomModalities": {},
+  "DicomAlwaysAllowEcho": true,
+  "DicomAlwaysAllowStore": true,
+
+  "StableAge": 60,
+  "StrictAetComparison": false,
+
+  "LuaScripts": [],
+  "Plugins": []
+}
